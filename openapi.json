@@ -1,0 +1,64 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Firstember Wallet API",
+    "version": "1.0.0",
+    "description": "Simulate wallet connections and send ETH inside ChatGPT using mock data."
+  },
+  "servers": [
+    {
+      "url": "https://showed-kissing-weighted-excluded.trycloudflare.com"
+    }
+  ],
+  "paths": {
+    "/connect_wallet": {
+      "post": {
+        "operationId": "connect_wallet",
+        "summary": "Connect a simulated wallet",
+        "responses": {
+          "200": {
+            "description": "Returns wallet connection status"
+          }
+        }
+      }
+    },
+    "/send_prompt": {
+      "post": {
+        "operationId": "send_prompt",
+        "summary": "Prompt to send ETH",
+        "responses": {
+          "200": {
+            "description": "Returns send prompt card"
+          }
+        }
+      }
+    },
+    "/confirm_send": {
+      "post": {
+        "operationId": "confirm_send",
+        "summary": "Confirm simulated transaction",
+        "parameters": [
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Recipient address"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Amount in ETH"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction confirmation"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Firstember Wallet",
+  "name_for_model": "firstember_wallet",
+  "description_for_human": "Simulate wallet connections and send ETH inside ChatGPT.",
+  "description_for_model": "Lets users connect and simulate ETH transactions using mock wallet data and the Firstember SDK.",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "servers": [
+      {
+        "type": "http",
+        "url": "https://showed-kissing-weighted-excluded.trycloudflare.com"
+      }
+    ]
+  },
+  "contact_email": "support@firstember.dev",
+  "legal_info_url": "https://firstember.dev/legal"
+}
