@@ -5,9 +5,9 @@ export function createCard(opts: {
   subtitle?: string;
   image?: string;
   buttons?: any[];
-  blocks?: any[];         // 🔥 allows wallet rows or structured content
-  footer?: string;        // 🔥 footer text (e.g., tips)
-  meta?: Record<string, any>; // 🔥 metadata like txHash
+  blocks?: any[];         
+  footer?: string;       
+  meta?: Record<string, any>; 
 }) {
   return {
     type: "ui.card",
