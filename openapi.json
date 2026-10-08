@@ -3,59 +3,87 @@
   "info": {
     "title": "Firstember Wallet API",
     "version": "1.0.0",
-    "description": "Simulate wallet connections and send ETH inside ChatGPT using mock data."
+    "description": "Unified MCP wallet actions for Ethereum and Solana."
   },
   "servers": [
     {
-      "url": "https://showed-kissing-weighted-excluded.trycloudflare.com"
+      "url": "https://astrology-strike-define-karaoke.trycloudflare.com"
     }
   ],
   "paths": {
-    "/connect_wallet": {
+    "/call": {
       "post": {
-        "operationId": "connect_wallet",
-        "summary": "Connect a simulated wallet",
-        "responses": {
-          "200": {
-            "description": "Returns wallet connection status"
-          }
-        }
-      }
-    },
-    "/send_prompt": {
-      "post": {
-        "operationId": "send_prompt",
-        "summary": "Prompt to send ETH",
-        "responses": {
-          "200": {
-            "description": "Returns send prompt card"
-          }
-        }
-      }
-    },
-    "/confirm_send": {
-      "post": {
-        "operationId": "confirm_send",
-        "summary": "Confirm simulated transaction",
+        "summary": "Execute a Firstember wallet action",
+        "operationId": "mcp_call",
         "parameters": [
           {
-            "name": "to",
+            "name": "action",
             "in": "query",
             "required": true,
-            "schema": { "type": "string" },
-            "description": "Recipient address"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": true,
-            "schema": { "type": "string" },
-            "description": "Amount in ETH"
+            "schema": {
+              "type": "string",
+              "enum": [
+                "show_wallets",
+                "connect_wallet",
+                "disconnect_wallet",
+                "send_prompt",
+                "confirm_send"
+              ]
+            },
+            "description": "Firstember action to execute"
           }
         ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "chain": {
+                    "type": "string",
+                    "enum": ["ethereum", "solana"],
+                    "description": "Blockchain to operate on"
+                  },
+                  "provider": {
+                    "type": "string",
+                    "description": "Wallet provider name"
+                  },
+                  "to": {
+                    "type": "string",
+                    "description": "Recipient address"
+                  },
+                  "amount": {
+                    "type": "string",
+                    "description": "Amount to send"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Transaction confirmation"
+            "description": "MCP action executed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["ok", "result"],
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "result": {
+                      "type": "object",
+                      "description": "UI card or wallet action response",
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
